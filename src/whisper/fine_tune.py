@@ -60,6 +60,7 @@ if __name__ == "__main__":
 
     # Load the processor
     # processor is a wrapper around the feature extractor and the tokenizer
+    # since whisper model is a encoder-decoder model, we don't need to train a tokenizer from scratch
     processor = WhisperProcessor.from_pretrained(f"openai/whisper-{model_size}")
 
     # Preprocess the dataset
