@@ -71,7 +71,7 @@ if __name__ == "__main__":
     data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=processor)
 
     # set forced_bos_token_id and suppress_tokens
-    # model.config.forced_decoder_ids = None
+    # forced_bos_token_id is used to specify the start token of the decoder, which is the language and task prompt
     model.generation_config.forced_decoder_ids = processor.get_decoder_prompt_ids(language="Chinese", task="transcribe")
     model.config.forced_decoder_ids = processor.get_decoder_prompt_ids(language="Chinese", task="transcribe")
     model.config.suppress_tokens = []

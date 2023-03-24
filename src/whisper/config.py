@@ -5,7 +5,7 @@ from tensorboardX import SummaryWriter
 
 
 exp_name = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-model_size = "tiny"
+model_size = "base"
 
 path_config = {
     "output" : os.path.join("whisper", model_size, exp_name),
@@ -23,7 +23,7 @@ os.makedirs(path_config["eval"], exist_ok=True)
 # set training arguments
 training_args = Seq2SeqTrainingArguments(
     output_dir=path_config["output"],
-    per_device_train_batch_size=16,
+    per_device_train_batch_size=8,
     gradient_accumulation_steps=1,  # increase by 2x for every 2x decrease in batch size
     learning_rate=1e-5,
     warmup_steps=500,
@@ -31,7 +31,7 @@ training_args = Seq2SeqTrainingArguments(
     gradient_checkpointing=True,
     fp16=True,
     evaluation_strategy="steps",
-    per_device_eval_batch_size=64,
+    per_device_eval_batch_size=32,
     predict_with_generate=True,
     generation_max_length=225,
     save_steps=200,
